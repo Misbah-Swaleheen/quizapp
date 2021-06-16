@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .hide {
+      display: none;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="ques" class="hide">
+    <p id="question"></p>
+    <div id="choices"></div>
+    <button onclick="check()" id="next">Next</button>
+  </div>
+  <button onclick="res()" id="sub" class="hide">Submit</button>
+
+  <div id="result"></div>
+
+  <button onclick="getfun()" id="btn">Start</button>
+  <script>
+    var questions = [{
+      question: "Who invented JavaScript?",
+      answers: {
+        a: "Douglas Crockford",
+        b: "Sheryl Sandberg",
+        c: "Brendan Eich"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "Which one of these is a JavaScript package manager?",
+      answers: {
+        a: "Node.js",
+        b: "TypeScript",
+        c: "npm"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "Which tool can you use to ensure code quality?",
+      answers: {
+        a: "Angular",
+        b: "jQuery",
+        c: "RequireJS",
+        d: "ESLint"
+      },
+      correctAnswer: "d"
+    }
+    ];
+    var btn = document.getElementById("btn");
+    var btn1 = document.getElementById("next");
+    var btn2 = document.getElementById("sub");
+    var questionShow = document.getElementById("ques")
+    var index = Math.floor(Math.random() *3) ;
+    var arr=[index];
+    var resValue;
+    var result,correctAns = 0;
+    var j = 1;
+    function getfun() {
+      if (!btn.classList.contains("hide")) {
+
+        btn.classList.add("hide");
+        questionShow.classList.add("show");
+        ques();
+      }
+    }
+
+    function ques() {
+      var q = document.getElementById("question").innerHTML = questions[index].question;
+      var c = document.getElementById("choices");
+      c.innerHTML = "<div id='ch'> "
+      for (var element in questions[index].answers) {
+
+        document.getElementById("ch").innerHTML += "<input type ='radio' class='choice' name='choice' value='" + element + "'>" + element + ". " + questions[index].answers[element];
+
+      }
+
+
+      c.innerHTML += '</div>'
+    }
+
+
+    function check() {
+      var rates = document.getElementsByName('choice');
+
+      for (var i = 0; i < rates.length; i++) {
+        if (rates[i].checked) {
+          resValue = rates[i].value;
+        }
+
+
+      }
+      console.log(questions[index].correctAnswer);
+
+      console.log(resValue == questions[index].correctAnswer);
+
+      if (resValue == questions[index].correctAnswer) {
+        result += 5;
+
+        correctAns++;
+
+
+      }
+ 
+   
+
+      if (j == (questions.length)) {
+        if (!btn1.classList.contains("hide")) {
+
+          btn1.classList.add("hide");
+          btn2.classList.remove("hide")
+          btn2.classList.add("show");
+          questionShow.classList.remove("show");
+          questionShow.classList.add("hide");
+        }
+
+      }
+      else {
+        
+        for (let i = 0; i < arr.length; i++) {
+          if (index == arr[index]) {
+          rand()
+         }
+ 
+          
+        }
+        
+        j++;
+          ques(); 
+        }
+      
+      }
+
+    
+    function res() {
+     
+
+      if (!btn2.classList.contains("hide")) {
+
+        btn2.classList.add("hide");
+        btn2.classList.remove("show")
+      }
+      document.getElementById("result").innerHTML = "<h1>Result </h1>" + result + "<h1> Correct Answers </h1>" + correctAns;
+    }
+
+
+function rand() {
+   index = Math.floor(Math.random() *3) ;
+   check()
+}
+
+
+  </script>
+</body>
+
+</html>
